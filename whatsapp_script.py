@@ -4,7 +4,7 @@ from time import sleep
 import csv 
   
 # csv file name 
-filename = "Participation teams - WGD.csv"
+filename = "teams.csv"
   
 # initializing the titles and rows list 
 fields = [] 

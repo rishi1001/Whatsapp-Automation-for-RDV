@@ -43,7 +43,6 @@ def Sendmsg():
         #enter name of receiver
         #name = input("Enter the name of user or group : ")
         name=rows[i][1]
-        #name="DU KE CONTACTS"
         #enter the message
         #msg = input("Enter the message : ")
         msg = "Hii "+ rows[i][1] +", Rishi here, Member of IITD dance club. This year we are going to organize Rendezvous  tentatively in the last week of March in online mode, and Kaleidoscope will be one of the Pronite in RDV. More details regarding the same will be announced soon. So we are contacting presidents of all the dance societies. So could you please share the contact details of the Current president of " + rows[i][3]

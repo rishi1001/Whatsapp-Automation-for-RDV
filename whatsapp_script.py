@@ -1,6 +1,32 @@
 from selenium import webdriver
 from time import sleep
 
+import csv 
+  
+# csv file name 
+filename = "Participation teams - WGD.csv"
+  
+# initializing the titles and rows list 
+fields = [] 
+rows = [] 
+
+with open(filename, 'r') as csvfile: 
+    # creating a csv reader object 
+    csvreader = csv.reader(csvfile) 
+      
+    # extracting field names through first row 
+    fields = next(csvreader) 
+  
+    # extracting each data row one by one 
+    for row in csvreader: 
+        rows.append(row) 
+  
+    # get total number of rows 
+    print("Total no. of rows: %d"%(csvreader.line_num)) 
+  
+# printing the field names 
+print('Field names are:' + ', '.join(field for field in fields)) 
+
 #get the driver for individual browser
 driver = webdriver.Chrome('/usr/bin/chromedriver')
 
@@ -11,22 +37,29 @@ driver.get("https://web.whatsapp.com/")
 #send message function
 def Sendmsg():
 
-    #enter name of receiver
-    name = input("Enter the name of user or group : ")
-    #enter the message
-    msg = input("Enter the message : ")
-    #enter the count
-    count = int(input("Enter Number of count : "))
+    for i in range(0,10):
 
-    user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
-    user.click()
 
-    msg_box = driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')
+        #enter name of receiver
+        #name = input("Enter the name of user or group : ")
+        name=rows[i][1]
+        #name="DU KE CONTACTS"
+        #enter the message
+        #msg = input("Enter the message : ")
+        msg = "Hii "+ rows[i][1] +", Rishi here, Member of IITD dance club. This year we are going to organize Rendezvous  tentatively in the last week of March in online mode, and Kaleidoscope will be one of the Pronite in RDV. More details regarding the same will be announced soon. So we are contacting presidents of all the dance societies. So could you please share the contact details of the Current president of " + rows[i][3]
+        #enter the count
+        #count = int(input("Enter Number of count : "))
+        count=1
 
-    for i in range(count):
-        msg_box.send_keys(msg)
-        button = driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]')
-        button.click()
+        user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
+        user.click()
+
+        msg_box = driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')
+
+        for i in range(count):
+            msg_box.send_keys(msg)
+            button = driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]')
+            button.click()
 
 #send image or video file function
 def sendimgvid():
